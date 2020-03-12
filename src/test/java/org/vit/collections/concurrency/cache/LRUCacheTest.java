@@ -2,14 +2,14 @@ package org.vit.collections.concurrency.cache;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.vit.collections.cache.ILRUCache;
 import org.vit.collections.cache.LRUCache;
 
 import java.util.Random;
 
 public class LRUCacheTest {
 
-    LRUCache<Integer, Integer> lruCache = new LRUCache<>(5);
-
+    private final LRUCache<Integer,Integer> lruCache = new LRUCache<>(5);
     @Test
     public void testLRUCache() {
         // add the elements in to the lru cache
@@ -69,5 +69,4 @@ public class LRUCacheTest {
         System.out.println("Most Recent: " + lruCache.getFirst() + " Least Recent: " + lruCache.getLast());
         Assert.assertEquals(lruVal, lruCache.getFirst());
     }
-
 }

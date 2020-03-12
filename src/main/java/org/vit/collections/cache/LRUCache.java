@@ -10,12 +10,13 @@ import java.util.Map;
  * This class maintains map of key value pairs and a doubly linked list to accommodate the access order.
  * As the entries are getting accessed, the recently accessed entry will be brought to the front of the queue.
  * And the least recently used value will be pushed to the end of the queue.
- *
+ * <p>
  * The Thread-Safe version of this class can be found in the package: org.vit.collections.concurrency.cache
+ *
  * @param <K>
  * @param <V>
  */
-public class LRUCache<K, V> {
+public class LRUCache<K, V> implements ILRUCache<K, V> {
 
     private class Node<Key, Value> {
         private Node<Key, Value> prev;
@@ -68,6 +69,7 @@ public class LRUCache<K, V> {
      * @param key:   Key of the Cache Entry
      * @param value: Value of the Cache Entry
      */
+    @Override
     public void add(K key, V value) {
         Node<K, V> node = cache.get(key);
 
@@ -94,9 +96,11 @@ public class LRUCache<K, V> {
     /**
      * Get the key from the cache and preservs the access order which means it
      * brings up the recently used value to the front of the cache.
+     *
      * @param key
      * @return value associated with the given key. If there is no key it returns null.
      */
+    @Override
     public V get(K key) {
         Node<K, V> node = cache.get(key);
         if (node == null) {
